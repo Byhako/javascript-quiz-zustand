@@ -1,1 +1,1 @@
-# Javasript quiz with Zustand
+# Javascript quiz with Zustand
