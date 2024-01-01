@@ -1,11 +1,14 @@
 import { create } from 'zustand'
 import type { Questions } from '../types'
+import confetti from 'canvas-confetti'
 
 interface State {
   questions: Questions[]
   currentQuestion: number
   fetchQuestions: (limit: number) => Promise<void>
   selectAnswer: (questionId: number, answerIndex: number) => void
+  goPreviousquestion: () => void
+  goNextquestion: () => void
 }
 
 export const useQuestionStore = create<State>((set, get) => ({
@@ -25,6 +28,8 @@ export const useQuestionStore = create<State>((set, get) => ({
     const questionInfo = newQuestions[questionsIndex]
     const isCorrectUserAnswer = questionInfo.correctAnswer === answerIndex
 
+    if (isCorrectUserAnswer) confetti()
+
     newQuestions[questionsIndex] = {
       ...questionInfo,
       isCorrectUserAnswer,
@@ -32,5 +37,21 @@ export const useQuestionStore = create<State>((set, get) => ({
     }
 
     set({ questions: newQuestions })
+  },
+  goNextquestion: () => {
+    const { currentQuestion, questions } = get()
+    const nextQuestion = currentQuestion + 1
+
+    if (nextQuestion < questions.length) {
+      set({ currentQuestion: nextQuestion })
+    }
+  },
+  goPreviousquestion: () => {
+    const { currentQuestion, questions } = get()
+    const previousQuestion = currentQuestion - 1
+
+    if (previousQuestion >= questions.length) {
+      set({ currentQuestion: previousQuestion })
+    }
   }
 }))

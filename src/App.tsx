@@ -7,6 +7,7 @@ import { Game } from './Game'
 
 function App() {
   const questions = useQuestionStore(state => state.questions)
+
   return (
     <main>
       <Container maxWidth='sm' sx={{ marginBottom: '20px' }}>
