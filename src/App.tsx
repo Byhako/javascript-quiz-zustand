@@ -10,7 +10,7 @@ function App() {
 
   return (
     <main>
-      <Container maxWidth='sm' sx={{ marginBottom: '20px' }}>
+      <Container maxWidth='sm' sx={{ margin: '30px 0' }}>
         <Stack direction='row' gap={2} alignItems='center' justifyContent='center'>
           <JavascriptLogo />
           <Typography variant='h2' component='h1'>
